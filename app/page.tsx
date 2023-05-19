@@ -16,7 +16,7 @@ const features = [
   },
   {
     name: 'Daily, weekly, monthly?',
-    description: "We don't want to overwhelm or annoy with emails, so you can pick your preference for when you want the newsletter",
+    description: "We don't want to overwhelm or annoy you with emails, so you can pick your preference for when you want the newsletter",
     icon: <span role="img" aria-label="clock">⏱️</span>,
   },
 ]
