@@ -5,8 +5,8 @@ import Head from 'next/head'
 import { Footer } from '@/components/footer'
 
 export const metadata = {
-  title: 'Vercel KV for Redis Next.js Starter',
-  description: 'A simple Next.js app with Vercel KV for Redis as the database',
+  title: 'Travel Giraffe | Personalized Flight Newsletter',
+  description: 'A news letter that sends flight offers that are tailored for the user',
 }
 
 const inter = Inter({
