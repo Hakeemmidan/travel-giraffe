@@ -8,6 +8,9 @@ module.exports = {
     './app/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
+    colors: {
+      primary: "#2a4364",
+    },
     extend: {
       fontFamily: {
         default: ['var(--font-inter)'],
