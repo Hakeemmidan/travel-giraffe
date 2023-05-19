@@ -8,12 +8,12 @@ module.exports = {
     './app/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    colors: {
-      primary: "#2a4364",
-    },
     extend: {
+      colors: {
+        primary: "#2a4364",
+      },
       fontFamily: {
-        default: ['var(--font-inter)'],
+        default: ['sans-serif'],
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
     },

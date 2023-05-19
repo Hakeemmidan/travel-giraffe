@@ -1,69 +1,61 @@
-import Link from 'next/link'
-import ViewCounter from '@/components/view-counter'
-import { Suspense } from 'react'
-import ExpandingArrow from '@/components/expanding-arrow'
+/* eslint-disable @next/next/no-img-element */
+import Image from "next/image";
+import { CloudArrowUpIcon, LockClosedIcon, ServerIcon } from '@heroicons/react/20/solid'
 
-export const dynamic = 'force-dynamic'
+const features = [
+  {
+    name: 'AI powered',
+    description:
+      "By using the info that you fill below, our system will make guesses on what flights you might like",
+    icon: <span role="img" aria-label="robot">🤖</span>,
+  },
+  {
+    name: 'Free',
+    description: 'Our newsletter is free to use',
+    icon: <span role="img" aria-label="flying-money">💸</span>,
+  },
+  {
+    name: 'Daily, weekly, monthly?',
+    description: "We don't want to overwhelm or annoy with emails, so you can pick your preference for when you want the newsletter",
+    icon: <span role="img" aria-label="clock">⏱️</span>,
+  },
+]
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center">
-      <Link
-        href="https://vercel.com/templates/next.js/kv-redis-starter"
-        className="group mt-20 sm:mt-0 rounded-full flex space-x-1 bg-white/30 shadow-sm ring-1 ring-gray-900/5 text-gray-600 text-sm font-medium px-10 py-2 hover:shadow-lg active:shadow-sm transition-all"
-      >
-        <p>Deploy your own to Vercel</p>
-        <ExpandingArrow />
-      </Link>
-      <h1 className="pt-4 pb-8 bg-gradient-to-br from-black via-[#171717] to-[#575757] bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl">
-        KV on Vercel
-      </h1>
-      <div className="bg-white/30 p-12 shadow-xl ring-1 ring-gray-900/5 rounded-lg backdrop-blur-lg max-w-xl mx-auto w-full">
-        <div className="flex justify-between items-center mb-4">
-          <div className="space-y-1">
-            <h2 className="text-xl font-semibold">
-              Announcing Vercel KV for Redis
-            </h2>
-            <p className="text-sm text-gray-500">
-              The best description in the world
-            </p>
+    <div className="overflow-hidden h-full bg-white py-24 sm:py-32">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8 ">
+        <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
+          <div className="lg:pr-8 lg:pt-4">
+            <div className="text-white lg:max-w-lg">
+              <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Flights tailored for your taste</p>
+              <p className="mt-6 text-lg leading-8 text-gray-600">
+                Make AI do the work. Every week, we look for flights that might you like 🛫 💛
+              </p>
+              <dl className="mt-10 max-w-xl space-y-8 text-base leading-7 text-gray-600 lg:max-w-none">
+                {features.map((feature) => (
+                  <div key={feature.name} className="relative pl-9">
+                    <dt className="inline font-semibold text-gray-900">
+                      <div className="absolute left-1 top-1 text-xl" aria-hidden="true">
+                        {feature.icon}
+                      </div>
+                      {feature.name}
+                    </dt>{' '}
+                    <dd>{feature.description}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
           </div>
-          <Suspense>
-            {/* @ts-expect-error Async Server Component */}
-            <ViewCounter />
-          </Suspense>
-        </div>
-        <div className="flex flex-col space-y-4">
-          <p className="text-gray-600">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
-          </p>
-          <p className="text-gray-600">
-            Duis aute irure dolor in reprehenderit in voluptate velit esse
-            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-            cupidatat non proident, sunt in culpa qui officia deserunt mollit
-            anim id est laborum.
-          </p>
+          <img
+            src="https://tailwindui.com/img/component-images/dark-project-app-screenshot.png"
+            alt="Product screenshot"
+            className="w-[48rem] max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem] md:-ml-4 lg:-ml-0"
+            width={2432}
+            height={1442}
+          />
         </div>
       </div>
-      <p className="font-light text-gray-600 w-full max-w-lg text-center mt-6">
-        <Link
-          href="https://vercel.com/kv"
-          className="font-medium underline underline-offset-4 hover:text-black transition-colors"
-        >
-          Vercel KV for Redis
-        </Link>{' '}
-        demo. Built with{' '}
-        <Link
-          href="https://nextjs.org/docs"
-          className="font-medium underline underline-offset-4 hover:text-black transition-colors"
-        >
-          Next.js App Router
-        </Link>
-        .
-      </p>
-    </main>
+    </div>
   )
 }
