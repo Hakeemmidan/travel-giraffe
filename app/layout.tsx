@@ -1,3 +1,4 @@
+import { Header } from '@/components/header'
 import './globals.css'
 import { Inter } from 'next/font/google'
 import Head from 'next/head'
@@ -23,7 +24,10 @@ export default function RootLayout({
       <Head>
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
       </Head>
-      <body className={inter.variable}>{children}</body>
+      <body className={inter.variable}>
+        <Header />
+        {children}
+      </body>
     </html>
   )
 }
