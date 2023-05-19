@@ -1,5 +1,6 @@
 import './globals.css'
 import { Inter } from 'next/font/google'
+import Head from 'next/head'
 
 export const metadata = {
   title: 'Vercel KV for Redis Next.js Starter',
@@ -19,6 +20,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <Head>
+        <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+      </Head>
       <body className={inter.variable}>{children}</body>
     </html>
   )
