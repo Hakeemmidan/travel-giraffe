@@ -2,6 +2,7 @@ import { Header } from '@/components/header'
 import './globals.css'
 import { Inter } from 'next/font/google'
 import Head from 'next/head'
+import { Footer } from '@/components/footer'
 
 export const metadata = {
   title: 'Vercel KV for Redis Next.js Starter',
@@ -24,9 +25,10 @@ export default function RootLayout({
       <Head>
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
       </Head>
-      <body className={inter.variable}>
+      <body className={`${inter.variable} relative`}>
         <Header />
-        {children}
+          {children}
+        <Footer />
       </body>
     </html>
   )
