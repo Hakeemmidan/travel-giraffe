@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import Image from "next/image";
 import { CloudArrowUpIcon, LockClosedIcon, ServerIcon } from '@heroicons/react/20/solid'
+import { Form } from "@/components/form";
 
 const features = [
   {
@@ -46,6 +47,7 @@ export default function Home() {
                 ))}
               </dl>
             </div>
+            <br />
           </div>
           <img
             src="https://tailwindui.com/img/component-images/dark-project-app-screenshot.png"
@@ -56,6 +58,7 @@ export default function Home() {
           />
         </div>
       </div>
+      <Form />
     </div>
   )
 }
