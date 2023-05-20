@@ -1,6 +1,7 @@
-import { FaMountain } from "react-icons/fa";
-import { RiSailboatLine } from "react-icons/ri"
+import { FaMountain, FaTree, FaUmbrellaBeach } from "react-icons/fa";
+import { RiSailboatLine, RiBuilding2Fill } from "react-icons/ri"
 import { MdOutlineDirectionsBike } from "react-icons/md"
+import { TbHomeHeart } from "react-icons/tb"
 
 export function Form() {
     
@@ -16,7 +17,7 @@ export function Form() {
             <p className="mt-2 mb-1 text-l font-medium text-gray-900 sm:text-xl">
                 What kind of travel do you like to do?
             </p>
-            <ul className="grid w-full gap-6 md:grid-cols-3">
+            <ul className="grid w-full gap-6 mb-10 md:grid-cols-3">
                 <li>
                     <input type="checkbox" id="adventure-option" value="" className="hidden peer"/>
                     <label htmlFor="adventure-option" className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-primary hover:text-primaryDarker peer-checked:text-primaryDarker hover:bg-gray-50">                           
@@ -41,6 +42,43 @@ export function Form() {
                         <div className="block">
                             <MdOutlineDirectionsBike className="mb-2 w-7 h-7" size={50} />
                             <div className="w-full text-lg font-semibold">Solo</div>
+                        </div>
+                    </label>
+                </li>
+            </ul>
+
+            {/* What vibes */}
+            <p className="mt-2 mb-1 text-l font-medium text-gray-900 sm:text-xl">
+                What are some areas that you like?
+            </p>
+            <ul className="grid w-full gap-6 mb-10 md:grid-cols-3">
+                <li>
+                    <input type="checkbox" id="beaches-option" value="" className="hidden peer"/>
+                    <label htmlFor="beaches-option" className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-primary hover:text-primaryDarker peer-checked:text-primaryDarker hover:bg-gray-50">                           
+                        <div className="block">
+                            <FaUmbrellaBeach className="mb-2 w-7 h-7" size={50} />
+                            <div className="w-full text-lg font-semibold">Beaches</div>
+                        </div>
+                    </label>
+                </li>
+                <li>
+                    <input type="checkbox" id="cities-option" value="" className="hidden peer"/>
+                    <label htmlFor="cities-option" className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-primary hover:text-primaryDarker peer-checked:text-primaryDarker hover:bg-gray-50">                           
+                        <div className="block">
+                            <RiBuilding2Fill className="mb-2 w-7 h-7" size={50} />
+                            <div className="w-full text-lg font-semibold">Cities</div>
+                        </div>
+                    </label>
+                </li>
+                <li>
+                    <input type="checkbox" id="village-option" value="" className="hidden peer"/>
+                    <label htmlFor="village-option" className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-primary hover:text-primaryDarker peer-checked:text-primaryDarker hover:bg-gray-50">                           
+                        <div className="block">
+                            <span className="flex">
+                                <FaTree className="mb-2 w-7 h-7" size={30} />
+                                <TbHomeHeart className="mb-2 w-7 h-7" size={50} />
+                            </span>
+                            <div className="w-full text-lg font-semibold">Village</div>
                         </div>
                     </label>
                 </li>
