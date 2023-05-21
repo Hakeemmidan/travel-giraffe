@@ -1,7 +1,8 @@
-import { FaMountain, FaTree, FaUmbrellaBeach } from "react-icons/fa";
+import { FaMountain, FaTree, FaUmbrellaBeach, FaBus } from "react-icons/fa";
 import { RiSailboatLine, RiBuilding2Fill } from "react-icons/ri"
 import { MdOutlineDirectionsBike } from "react-icons/md"
 import { TbHomeHeart } from "react-icons/tb"
+import { GiCookingPot, GiCanoe } from "react-icons/gi"
 
 export function Form() {
     
@@ -84,7 +85,42 @@ export function Form() {
                 </li>
             </ul>
 
-            
+            {/* Things that matter when traveling */}
+            <p className="mt-2 mb-1 text-l font-medium text-gray-900 sm:text-xl">
+                What do you prefer to be available?
+            </p>
+            <ul className="grid w-full gap-6 mb-10 md:grid-cols-3">
+                <li>
+                    <input type="checkbox" id="food-option" value="" className="hidden peer"/>
+                    <label htmlFor="food-option" className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-primary hover:text-primaryDarker peer-checked:text-primaryDarker hover:bg-gray-50">                           
+                        <div className="block">
+                            <GiCookingPot className="mb-2 w-7 h-7" size={50} />
+                            <div className="w-full text-lg font-semibold">Great food</div>
+                        </div>
+                    </label>
+                </li>
+                <li>
+                    <input type="checkbox" id="transportation-option" value="" className="hidden peer"/>
+                    <label htmlFor="transportation-option" className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-primary hover:text-primaryDarker peer-checked:text-primaryDarker hover:bg-gray-50">                           
+                        <div className="block">
+                            <FaBus className="mb-2 w-7 h-7" size={50} />
+                            <div className="w-full text-lg font-semibold">Public transportation</div>
+                        </div>
+                    </label>
+                </li>
+                <li>
+                    <input type="checkbox" id="activities-option" value="" className="hidden peer"/>
+                    <label htmlFor="activities-option" className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-primary hover:text-primaryDarker peer-checked:text-primaryDarker hover:bg-gray-50">                           
+                        <div className="block">
+                            <span className="flex">
+                                <GiCanoe className="mb-2 w-7 h-7" size={50} />
+                            </span>
+                            <div className="w-full text-lg font-semibold">Activities</div>
+                        </div>
+                    </label>
+                </li>
+            </ul>
+
             {/* Email section */}
             <div className="flex items-center">
                 <div className="relative">
