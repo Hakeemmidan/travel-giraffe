@@ -1,10 +1,35 @@
+'use client'
+
 import { FaMountain, FaTree, FaUmbrellaBeach, FaBus } from "react-icons/fa";
 import { RiSailboatLine, RiBuilding2Fill } from "react-icons/ri"
 import { MdOutlineDirectionsBike } from "react-icons/md"
 import { TbHomeHeart } from "react-icons/tb"
 import { GiCookingPot, GiCanoe } from "react-icons/gi"
+import { useRouter } from "next/router";
+import { createClient, kv } from '@vercel/kv'
+import { useState } from "react";
+import { HSET } from "@/app/api/route";
 
 export function Form() {
+    const [email, setEmail] = useState('')
+
+    const handleSignUp = async () => {
+        const isValidEmail = email.match(/^\S+@\S+\.\S+$/)
+        if (!isValidEmail) {
+            window.alert('Please enter valid email')
+            return
+        }
+        const likes: string[] = []
+        // get likes
+        document.querySelectorAll<HTMLInputElement>('input:checked').forEach(el => likes.push(el.name as string))
+        console.log('likes', likes)
+        const mainKv = createClient({
+            url: process.env.KV_REST_API_URL || '',
+            token: process.env.KV_REST_API_TOKEN || ''
+        });
+    
+        const temp = await mainKv.hset(email, { likes: likes });
+    }
     
     return (
         <div className="pt-12 px-6 lg:px-8">
@@ -20,7 +45,7 @@ export function Form() {
             </p>
             <ul className="grid w-full gap-6 mb-10 md:grid-cols-3">
                 <li>
-                    <input type="checkbox" id="adventure-option" value="" className="hidden peer"/>
+                    <input type="checkbox" id="adventure-option" name="adventure" value="" className="hidden peer"/>
                     <label htmlFor="adventure-option" className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-primary hover:text-primaryDarker peer-checked:text-primaryDarker hover:bg-gray-50">                           
                         <div className="block">
                             <FaMountain className="mb-2 w-7 h-7" size={50} />
@@ -29,7 +54,7 @@ export function Form() {
                     </label>
                 </li>
                 <li>
-                    <input type="checkbox" id="luxury-option" value="" className="hidden peer"/>
+                    <input type="checkbox" id="luxury-option" name="luxury" value="" className="hidden peer"/>
                     <label htmlFor="luxury-option" className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-primary hover:text-primaryDarker peer-checked:text-primaryDarker hover:bg-gray-50">                           
                         <div className="block">
                             <RiSailboatLine className="mb-2 w-7 h-7" size={50} />
@@ -38,7 +63,7 @@ export function Form() {
                     </label>
                 </li>
                 <li>
-                    <input type="checkbox" id="solo-option" value="" className="hidden peer"/>
+                    <input type="checkbox" id="solo-option" name="solo travel" value="" className="hidden peer"/>
                     <label htmlFor="solo-option" className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-primary hover:text-primaryDarker peer-checked:text-primaryDarker hover:bg-gray-50">                           
                         <div className="block">
                             <MdOutlineDirectionsBike className="mb-2 w-7 h-7" size={50} />
@@ -54,7 +79,7 @@ export function Form() {
             </p>
             <ul className="grid w-full gap-6 mb-10 md:grid-cols-3">
                 <li>
-                    <input type="checkbox" id="beaches-option" value="" className="hidden peer"/>
+                    <input type="checkbox" id="beaches-option" name="beaches" value="" className="hidden peer"/>
                     <label htmlFor="beaches-option" className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-primary hover:text-primaryDarker peer-checked:text-primaryDarker hover:bg-gray-50">                           
                         <div className="block">
                             <FaUmbrellaBeach className="mb-2 w-7 h-7" size={50} />
@@ -63,7 +88,7 @@ export function Form() {
                     </label>
                 </li>
                 <li>
-                    <input type="checkbox" id="cities-option" value="" className="hidden peer"/>
+                    <input type="checkbox" id="cities-option" name="cities" value="" className="hidden peer"/>
                     <label htmlFor="cities-option" className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-primary hover:text-primaryDarker peer-checked:text-primaryDarker hover:bg-gray-50">                           
                         <div className="block">
                             <RiBuilding2Fill className="mb-2 w-7 h-7" size={50} />
@@ -72,7 +97,7 @@ export function Form() {
                     </label>
                 </li>
                 <li>
-                    <input type="checkbox" id="village-option" value="" className="hidden peer"/>
+                    <input type="checkbox" id="village-option" name="village" value="" className="hidden peer"/>
                     <label htmlFor="village-option" className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-primary hover:text-primaryDarker peer-checked:text-primaryDarker hover:bg-gray-50">                           
                         <div className="block">
                             <span className="flex">
@@ -91,7 +116,7 @@ export function Form() {
             </p>
             <ul className="grid w-full gap-6 mb-10 md:grid-cols-3">
                 <li>
-                    <input type="checkbox" id="food-option" value="" className="hidden peer"/>
+                    <input type="checkbox" id="food-option" name="food" value="" className="hidden peer"/>
                     <label htmlFor="food-option" className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-primary hover:text-primaryDarker peer-checked:text-primaryDarker hover:bg-gray-50">                           
                         <div className="block">
                             <GiCookingPot className="mb-2 w-7 h-7" size={50} />
@@ -100,7 +125,7 @@ export function Form() {
                     </label>
                 </li>
                 <li>
-                    <input type="checkbox" id="transportation-option" value="" className="hidden peer"/>
+                    <input type="checkbox" id="transportation-option" name="public transportation" value="" className="hidden peer"/>
                     <label htmlFor="transportation-option" className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-primary hover:text-primaryDarker peer-checked:text-primaryDarker hover:bg-gray-50">                           
                         <div className="block">
                             <FaBus className="mb-2 w-7 h-7" size={50} />
@@ -109,7 +134,7 @@ export function Form() {
                     </label>
                 </li>
                 <li>
-                    <input type="checkbox" id="activities-option" value="" className="hidden peer"/>
+                    <input type="checkbox" id="activities-option" name="activities" value="" className="hidden peer"/>
                     <label htmlFor="activities-option" className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-primary hover:text-primaryDarker peer-checked:text-primaryDarker hover:bg-gray-50">                           
                         <div className="block">
                             <span className="flex">
@@ -127,9 +152,9 @@ export function Form() {
                     <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                         <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
                     </div>
-                    <input type="email" id="input-group-1" className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block  pl-10 p-2.5" placeholder="name@flowbite.com" />
+                    <input value={email} onChange={e => setEmail(e.target.value)}  type="email" required className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block  pl-10 p-2.5" placeholder="someemail@gmail.com" />
                 </div>
-                <a className="cursor-pointer h-max ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2.5 px-4 rounded tracking-wide">
+                <a onClick={handleSignUp} className={`cursor-pointer h-max ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2.5 px-4 rounded tracking-wide ${email.trim() === '' && 'cursor-not-allowed opacity-50 bg-gray-400 hover:bg-gray-400'}`}>
                     Sign up
                 </a>
             </div>

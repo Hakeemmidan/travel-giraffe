@@ -1,0 +1,9 @@
+{
+	"users": {
+		"someemail@gmail.com": {
+			"info": {
+                "likes": ["adventure", "..."]
+            }
+		}
+	}
+}
