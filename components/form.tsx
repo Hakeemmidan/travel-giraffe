@@ -5,10 +5,8 @@ import { RiSailboatLine, RiBuilding2Fill } from "react-icons/ri"
 import { MdOutlineDirectionsBike } from "react-icons/md"
 import { TbHomeHeart } from "react-icons/tb"
 import { GiCookingPot, GiCanoe } from "react-icons/gi"
-import { useRouter } from "next/router";
 import { createClient, kv } from '@vercel/kv'
 import { useState } from "react";
-import { HSET } from "@/app/api/route";
 
 export function Form() {
     const [email, setEmail] = useState('')
