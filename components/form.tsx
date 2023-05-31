@@ -17,16 +17,13 @@ export function Form() {
             window.alert('Please enter valid email')
             return
         }
+
         const likes: string[] = []
         // get likes
         document.querySelectorAll<HTMLInputElement>('input:checked').forEach(el => likes.push(el.name as string))
-        console.log('likes', likes)
-        const mainKv = createClient({
-            url: process.env.KV_REST_API_URL || '',
-            token: process.env.KV_REST_API_TOKEN || ''
-        });
-    
-        const temp = await mainKv.hset(email, { likes: likes });
+        const res = await fetch('/api/test')
+        const json = await res.json()
+        console.log(json)
     }
     
     return (
