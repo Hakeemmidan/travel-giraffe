@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { kv } from '@vercel/kv'
+import clientPromise from "@/lib/mongodb";
 
 interface PostRequestBody {
   email: string;
@@ -8,20 +9,25 @@ interface PostRequestBody {
 }
 
 export async function POST(request: Request) {
-  const requestBody: PostRequestBody = await request.json()
+  const client = await clientPromise;
+  const db = client.db('sample_airbnb');
+  const listings = await db.collection('listingsAndReviews').find().toArray();
+  console.log('@@@@@@@@@', listings)
 
-  const { email, likes, txtInput } = requestBody
-  console.log(email, likes, txtInput)
+  // const requestBody: PostRequestBody = await request.json()
 
-  try {
-    await kv.hset(email, { likes, txtInput })
-  } catch (error) {
-    console.log('knkfjdklfjdlkfj')
-    console.error('error', error)
+  // const { email, likes, txtInput } = requestBody
+  // console.log(email, likes, txtInput)
+
+  // try {
+  //   await kv.hset(email, { likes, txtInput })
+  // } catch (error) {
+  //   console.log('knkfjdklfjdlkfj')
+  //   console.error('error', error)
 
 
-    return NextResponse.json({ error }, { status: 500 });
-  }
+  //   return NextResponse.json({ error }, { status: 500 });
+  // }
 
-  NextResponse.redirect(new URL('/success', request.url))
+  // NextResponse.redirect(new URL('/success', request.url))
 }
