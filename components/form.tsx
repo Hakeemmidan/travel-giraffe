@@ -24,7 +24,7 @@ export function Form() {
             await fetch('/api/user-preferences', {
                 method: 'POST',
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email, likes, txtInput: 'test test' })
+                body: JSON.stringify({ email, likes })
         }) } catch(error) {
             console.error(error)
         }
