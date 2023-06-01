@@ -20,15 +20,12 @@ export function Form() {
         const likes: string[] = []
         // get likes
         document.querySelectorAll<HTMLInputElement>('input:checked').forEach(el => likes.push(el.name as string))
-        let res
         try {
-            res = await fetch('/api/user-preferences', {
+            await fetch('/api/user-preferences', {
                 method: 'POST',
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email, likes, txtInput: 'test test' })
         }) } catch(error) {
-            console.log('teteetetet')
-            debugger
             console.error(error)
         }
     }
