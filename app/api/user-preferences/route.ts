@@ -16,6 +16,8 @@ export async function POST(request: Request) {
     const { email, likes } = requestBody
     // 3. Insert into DB
     await db.collection('users').insertOne({ email, likes });
+    // 4. Just need to return anything
+    return NextResponse.json({ success: true })
   } catch (error) {
     // TODO: Log (SNBH)
     return NextResponse.json({ error: `Failed because of ${error}` }, { status: 500 });  
