@@ -5,7 +5,6 @@ import { RiSailboatLine, RiBuilding2Fill } from "react-icons/ri"
 import { MdOutlineDirectionsBike } from "react-icons/md"
 import { TbHomeHeart } from "react-icons/tb"
 import { GiCookingPot, GiCanoe } from "react-icons/gi"
-import { createClient, kv } from '@vercel/kv'
 import { useState } from "react";
 
 export function Form() {
@@ -21,9 +20,17 @@ export function Form() {
         const likes: string[] = []
         // get likes
         document.querySelectorAll<HTMLInputElement>('input:checked').forEach(el => likes.push(el.name as string))
-        const res = await fetch('/api/test')
-        const json = await res.json()
-        console.log(json)
+        let res
+        try {
+            res = await fetch('/api/user-preferences', {
+                method: 'POST',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, likes, txtInput: 'test test' })
+        }) } catch(error) {
+            console.log('teteetetet')
+            debugger
+            console.error(error)
+        }
     }
     
     return (
