@@ -10,7 +10,7 @@ export async function POST(request: Request) {
   try {
     // 1. Load DB
     const client = await clientPromise;
-    const db = client.db('test');
+    const db = client.db('main');
     // 2. Get request body items
     const requestBody: PostRequestBody = await request.json()
     const { email, likes } = requestBody
