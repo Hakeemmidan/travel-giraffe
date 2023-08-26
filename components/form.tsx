@@ -6,14 +6,13 @@ import { MdOutlineDirectionsBike } from "react-icons/md"
 import { TbHomeHeart } from "react-icons/tb"
 import { GiCookingPot, GiCanoe } from "react-icons/gi"
 import { useState } from "react";
+import * as emailValidator from 'email-validator'
 
 export function Form() {
     const [email, setEmail] = useState('')
 
     const handleSignUp = async () => {
-        // Regular expression for email validation
-        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-        const isEmailValid = emailRegex.test(email)
+        const isEmailValid = emailValidator.validate(email)
         if (!isEmailValid) {
             window.alert('Please enter a valid email address.')
             return
