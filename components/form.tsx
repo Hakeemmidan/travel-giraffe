@@ -8,9 +8,16 @@ import { GiCookingPot, GiCanoe } from "react-icons/gi"
 import { useState } from "react";
 import * as emailValidator from 'email-validator'
 
+enum EmailFrequencies {
+    DAILY = 'daily',
+    WEEKLY = 'weekly',
+    MONTHYL = 'monthly'
+}
+
 export function Form() {
     const [email, setEmail] = useState('')
     const [likes, setLikes] = useState<string[]>([])
+    const [emailFreqPref, setEmailFreqPref] = useState<EmailFrequencies>(EmailFrequencies.WEEKLY)
 
     const handleSignUp = async () => {
         const isEmailValid = emailValidator.validate(email)
@@ -19,22 +26,28 @@ export function Form() {
             return
         }
 
+        console.log(emailFreqPref)
+        debugger
         try {
             await fetch('/api/user-preferences', {
                 method: 'POST',
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email, likes })
+                body: JSON.stringify({ email, likes, emailFreqPref })
         }) } catch(error) {
             console.error(error)
         }
     }
     
-    const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleLikesChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.checked) {
             setLikes([...likes, event.target.name])
         } else {
             setLikes(likes.filter(like => like !== event.target.name))
         }
+    }
+
+    const handleEmailFreqPrefChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setEmailFreqPref(event.target.value as EmailFrequencies)
     }
 
     return (
@@ -51,7 +64,7 @@ export function Form() {
             </p>
             <ul className="grid w-full gap-6 mb-10 md:grid-cols-3">
                 <li>
-                    <input type="checkbox" id="adventure-option" name="adventure" value="" className="hidden peer" onChange={handleCheckboxChange}/>
+                    <input type="checkbox" id="adventure-option" name="adventure" value="" className="hidden peer" onChange={handleLikesChange}/>
                     <label htmlFor="adventure-option" className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-primary hover:text-primaryDarker peer-checked:text-primaryDarker hover:bg-gray-50">                           
                         <div className="block">
                             <FaMountain className="mb-2 w-7 h-7" size={50} />
@@ -60,7 +73,7 @@ export function Form() {
                     </label>
                 </li>
                 <li>
-                    <input type="checkbox" id="luxury-option" name="luxury" value="" className="hidden peer" onChange={handleCheckboxChange}/>
+                    <input type="checkbox" id="luxury-option" name="luxury" value="" className="hidden peer" onChange={handleLikesChange}/>
                     <label htmlFor="luxury-option" className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-primary hover:text-primaryDarker peer-checked:text-primaryDarker hover:bg-gray-50">                           
                         <div className="block">
                             <RiSailboatLine className="mb-2 w-7 h-7" size={50} />
@@ -69,7 +82,7 @@ export function Form() {
                     </label>
                 </li>
                 <li>
-                    <input type="checkbox" id="solo-option" name="solo travel" value="" className="hidden peer" onChange={handleCheckboxChange}/>
+                    <input type="checkbox" id="solo-option" name="solo travel" value="" className="hidden peer" onChange={handleLikesChange}/>
                     <label htmlFor="solo-option" className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-primary hover:text-primaryDarker peer-checked:text-primaryDarker hover:bg-gray-50">                           
                         <div className="block">
                             <MdOutlineDirectionsBike className="mb-2 w-7 h-7" size={50} />
@@ -85,7 +98,7 @@ export function Form() {
             </p>
             <ul className="grid w-full gap-6 mb-10 md:grid-cols-3">
                 <li>
-                    <input type="checkbox" id="beaches-option" name="beaches" value="" className="hidden peer" onChange={handleCheckboxChange}/>
+                    <input type="checkbox" id="beaches-option" name="beaches" value="" className="hidden peer" onChange={handleLikesChange}/>
                     <label htmlFor="beaches-option" className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-primary hover:text-primaryDarker peer-checked:text-primaryDarker hover:bg-gray-50">                           
                         <div className="block">
                             <FaUmbrellaBeach className="mb-2 w-7 h-7" size={50} />
@@ -94,7 +107,7 @@ export function Form() {
                     </label>
                 </li>
                 <li>
-                    <input type="checkbox" id="cities-option" name="cities" value="" className="hidden peer" onChange={handleCheckboxChange}/>
+                    <input type="checkbox" id="cities-option" name="cities" value="" className="hidden peer" onChange={handleLikesChange}/>
                     <label htmlFor="cities-option" className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-primary hover:text-primaryDarker peer-checked:text-primaryDarker hover:bg-gray-50">                           
                         <div className="block">
                             <RiBuilding2Fill className="mb-2 w-7 h-7" size={50} />
@@ -103,7 +116,7 @@ export function Form() {
                     </label>
                 </li>
                 <li>
-                    <input type="checkbox" id="village-option" name="village" value="" className="hidden peer" onChange={handleCheckboxChange}/>
+                    <input type="checkbox" id="village-option" name="village" value="" className="hidden peer" onChange={handleLikesChange}/>
                     <label htmlFor="village-option" className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-primary hover:text-primaryDarker peer-checked:text-primaryDarker hover:bg-gray-50">                           
                         <div className="block">
                             <span className="flex">
@@ -122,7 +135,7 @@ export function Form() {
             </p>
             <ul className="grid w-full gap-6 mb-10 md:grid-cols-3">
                 <li>
-                    <input type="checkbox" id="food-option" name="food" value="" className="hidden peer" onChange={handleCheckboxChange}/>
+                    <input type="checkbox" id="food-option" name="food" value="" className="hidden peer" onChange={handleLikesChange}/>
                     <label htmlFor="food-option" className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-primary hover:text-primaryDarker peer-checked:text-primaryDarker hover:bg-gray-50">                           
                         <div className="block">
                             <GiCookingPot className="mb-2 w-7 h-7" size={50} />
@@ -131,7 +144,7 @@ export function Form() {
                     </label>
                 </li>
                 <li>
-                    <input type="checkbox" id="transportation-option" name="public transportation" value="" className="hidden peer" onChange={handleCheckboxChange}/>
+                    <input type="checkbox" id="transportation-option" name="public transportation" value="" className="hidden peer" onChange={handleLikesChange}/>
                     <label htmlFor="transportation-option" className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-primary hover:text-primaryDarker peer-checked:text-primaryDarker hover:bg-gray-50">                           
                         <div className="block">
                             <FaBus className="mb-2 w-7 h-7" size={50} />
@@ -140,13 +153,44 @@ export function Form() {
                     </label>
                 </li>
                 <li>
-                    <input type="checkbox" id="activities-option" name="activities" value="" className="hidden peer" onChange={handleCheckboxChange}/>
+                    <input type="checkbox" id="activities-option" name="activities" value="" className="hidden peer" onChange={handleLikesChange}/>
                     <label htmlFor="activities-option" className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-primary hover:text-primaryDarker peer-checked:text-primaryDarker hover:bg-gray-50">                           
                         <div className="block">
                             <span className="flex">
                                 <GiCanoe className="mb-2 w-7 h-7" size={50} />
                             </span>
                             <div className="w-full text-lg font-semibold">Activities</div>
+                        </div>
+                    </label>
+                </li>
+            </ul>
+
+            {/* Email Frequency Preference */}
+            <p className="mt-2 mb-1 text-l font-medium text-gray-900 sm:text-xl">
+                When do you want to recieve the email?
+            </p>
+            <ul className="grid w-full gap-6 mb-10 md:grid-cols-3">
+                <li>
+                    <input type="radio" id="daily-option" name="emailFreqPref" value={EmailFrequencies.DAILY} className="hidden peer" onChange={handleEmailFreqPrefChange}/>
+                    <label htmlFor="daily-option" className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-primary hover:text-primaryDarker peer-checked:text-primaryDarker hover:bg-gray-50">                           
+                        <div className="block">
+                            <div className="w-full text-lg font-semibold">Daily</div>
+                        </div>
+                    </label>
+                </li>
+                <li>
+                    <input type="radio" id="weekly-option" name="emailFreqPref" value={EmailFrequencies.WEEKLY} className="hidden peer" onChange={handleEmailFreqPrefChange}/>
+                    <label htmlFor="weekly-option" className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-primary hover:text-primaryDarker peer-checked:text-primaryDarker hover:bg-gray-50">                           
+                        <div className="block">
+                            <div className="w-full text-lg font-semibold">Weekly</div>
+                        </div>
+                    </label>
+                </li>
+                <li>
+                    <input type="radio" id="monthly-option" name="emailFreqPref" value={EmailFrequencies.MONTHYL} className="hidden peer" onChange={handleEmailFreqPrefChange}/>
+                    <label htmlFor="monthly-option" className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-primary hover:text-primaryDarker peer-checked:text-primaryDarker hover:bg-gray-50">                           
+                        <div className="block">
+                            <div className="w-full text-lg font-semibold">Monthly</div>
                         </div>
                     </label>
                 </li>
