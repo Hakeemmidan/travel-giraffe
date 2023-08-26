@@ -11,9 +11,11 @@ export function Form() {
     const [email, setEmail] = useState('')
 
     const handleSignUp = async () => {
-        const isValidEmail = email.match(/^\S+@\S+\.\S+$/)
-        if (!isValidEmail) {
-            window.alert('Please enter valid email')
+        // Regular expression for email validation
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+        const isEmailValid = emailRegex.test(email)
+        if (!isEmailValid) {
+            window.alert('Please enter a valid email address.')
             return
         }
 
