@@ -10,6 +10,7 @@ import * as emailValidator from 'email-validator'
 
 export function Form() {
     const [email, setEmail] = useState('')
+    const [likes, setLikes] = useState<string[]>([])
 
     const handleSignUp = async () => {
         const isEmailValid = emailValidator.validate(email)
@@ -18,9 +19,6 @@ export function Form() {
             return
         }
 
-        const likes: string[] = []
-        // get likes
-        document.querySelectorAll<HTMLInputElement>('input:checked').forEach(el => likes.push(el.name as string))
         try {
             await fetch('/api/user-preferences', {
                 method: 'POST',
@@ -31,6 +29,14 @@ export function Form() {
         }
     }
     
+    const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (event.target.checked) {
+            setLikes([...likes, event.target.name])
+        } else {
+            setLikes(likes.filter(like => like !== event.target.name))
+        }
+    }
+
     return (
         <div className="pt-12 px-6 lg:px-8">
             {/* Header */}
@@ -45,7 +51,7 @@ export function Form() {
             </p>
             <ul className="grid w-full gap-6 mb-10 md:grid-cols-3">
                 <li>
-                    <input type="checkbox" id="adventure-option" name="adventure" value="" className="hidden peer"/>
+                    <input type="checkbox" id="adventure-option" name="adventure" value="" className="hidden peer" onChange={handleCheckboxChange}/>
                     <label htmlFor="adventure-option" className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-primary hover:text-primaryDarker peer-checked:text-primaryDarker hover:bg-gray-50">                           
                         <div className="block">
                             <FaMountain className="mb-2 w-7 h-7" size={50} />
@@ -54,7 +60,7 @@ export function Form() {
                     </label>
                 </li>
                 <li>
-                    <input type="checkbox" id="luxury-option" name="luxury" value="" className="hidden peer"/>
+                    <input type="checkbox" id="luxury-option" name="luxury" value="" className="hidden peer" onChange={handleCheckboxChange}/>
                     <label htmlFor="luxury-option" className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-primary hover:text-primaryDarker peer-checked:text-primaryDarker hover:bg-gray-50">                           
                         <div className="block">
                             <RiSailboatLine className="mb-2 w-7 h-7" size={50} />
@@ -63,7 +69,7 @@ export function Form() {
                     </label>
                 </li>
                 <li>
-                    <input type="checkbox" id="solo-option" name="solo travel" value="" className="hidden peer"/>
+                    <input type="checkbox" id="solo-option" name="solo travel" value="" className="hidden peer" onChange={handleCheckboxChange}/>
                     <label htmlFor="solo-option" className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-primary hover:text-primaryDarker peer-checked:text-primaryDarker hover:bg-gray-50">                           
                         <div className="block">
                             <MdOutlineDirectionsBike className="mb-2 w-7 h-7" size={50} />
@@ -79,7 +85,7 @@ export function Form() {
             </p>
             <ul className="grid w-full gap-6 mb-10 md:grid-cols-3">
                 <li>
-                    <input type="checkbox" id="beaches-option" name="beaches" value="" className="hidden peer"/>
+                    <input type="checkbox" id="beaches-option" name="beaches" value="" className="hidden peer" onChange={handleCheckboxChange}/>
                     <label htmlFor="beaches-option" className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-primary hover:text-primaryDarker peer-checked:text-primaryDarker hover:bg-gray-50">                           
                         <div className="block">
                             <FaUmbrellaBeach className="mb-2 w-7 h-7" size={50} />
@@ -88,7 +94,7 @@ export function Form() {
                     </label>
                 </li>
                 <li>
-                    <input type="checkbox" id="cities-option" name="cities" value="" className="hidden peer"/>
+                    <input type="checkbox" id="cities-option" name="cities" value="" className="hidden peer" onChange={handleCheckboxChange}/>
                     <label htmlFor="cities-option" className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-primary hover:text-primaryDarker peer-checked:text-primaryDarker hover:bg-gray-50">                           
                         <div className="block">
                             <RiBuilding2Fill className="mb-2 w-7 h-7" size={50} />
@@ -97,7 +103,7 @@ export function Form() {
                     </label>
                 </li>
                 <li>
-                    <input type="checkbox" id="village-option" name="village" value="" className="hidden peer"/>
+                    <input type="checkbox" id="village-option" name="village" value="" className="hidden peer" onChange={handleCheckboxChange}/>
                     <label htmlFor="village-option" className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-primary hover:text-primaryDarker peer-checked:text-primaryDarker hover:bg-gray-50">                           
                         <div className="block">
                             <span className="flex">
@@ -116,7 +122,7 @@ export function Form() {
             </p>
             <ul className="grid w-full gap-6 mb-10 md:grid-cols-3">
                 <li>
-                    <input type="checkbox" id="food-option" name="food" value="" className="hidden peer"/>
+                    <input type="checkbox" id="food-option" name="food" value="" className="hidden peer" onChange={handleCheckboxChange}/>
                     <label htmlFor="food-option" className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-primary hover:text-primaryDarker peer-checked:text-primaryDarker hover:bg-gray-50">                           
                         <div className="block">
                             <GiCookingPot className="mb-2 w-7 h-7" size={50} />
@@ -125,7 +131,7 @@ export function Form() {
                     </label>
                 </li>
                 <li>
-                    <input type="checkbox" id="transportation-option" name="public transportation" value="" className="hidden peer"/>
+                    <input type="checkbox" id="transportation-option" name="public transportation" value="" className="hidden peer" onChange={handleCheckboxChange}/>
                     <label htmlFor="transportation-option" className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-primary hover:text-primaryDarker peer-checked:text-primaryDarker hover:bg-gray-50">                           
                         <div className="block">
                             <FaBus className="mb-2 w-7 h-7" size={50} />
@@ -134,7 +140,7 @@ export function Form() {
                     </label>
                 </li>
                 <li>
-                    <input type="checkbox" id="activities-option" name="activities" value="" className="hidden peer"/>
+                    <input type="checkbox" id="activities-option" name="activities" value="" className="hidden peer" onChange={handleCheckboxChange}/>
                     <label htmlFor="activities-option" className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:border-primary hover:text-primaryDarker peer-checked:text-primaryDarker hover:bg-gray-50">                           
                         <div className="block">
                             <span className="flex">
