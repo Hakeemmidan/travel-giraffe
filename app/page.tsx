@@ -1,13 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
-import Image from "next/image";
-import { CloudArrowUpIcon, LockClosedIcon, ServerIcon } from '@heroicons/react/20/solid'
 import { Form } from "@/components/form";
 
 const features = [
   {
     name: 'AI powered',
-    description:
-      "By using the info that you fill below, our system will make guesses on what flights you might like",
+    description: "By using the info that you fill below, our system will make guesses on what flights you might like",
     icon: <span role="img" aria-label="robot">🤖</span>,
   },
   {
