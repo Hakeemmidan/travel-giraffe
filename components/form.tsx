@@ -8,7 +8,7 @@ import { GiCookingPot, GiCanoe } from "react-icons/gi"
 import { useState } from "react";
 import * as emailValidator from 'email-validator'
 
-enum EmailFrequencies {
+export enum EmailFrequencies {
     DAILY = 'daily',
     WEEKLY = 'weekly',
     MONTHYL = 'monthly'
@@ -26,14 +26,13 @@ export function Form() {
             return
         }
 
-        console.log(emailFreqPref)
-        debugger
         try {
             await fetch('/api/user-preferences', {
                 method: 'POST',
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email, likes, emailFreqPref })
-        }) } catch(error) {
+                body: JSON.stringify({ email, likes, email_frequency_preference: emailFreqPref })
+            })
+        } catch(error) {
             console.error(error)
         }
     }
